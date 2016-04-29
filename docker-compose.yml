@@ -1,0 +1,15 @@
+version: "2"
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - 5672:5672
+      - 15672:15672
+  digester:
+    depends_on:
+      - rabbitmq
+    build:
+      context: ./reddit_mailer/digester
+    image: python:3.5.1-slim
+    ports:
+      - 8000:8000
