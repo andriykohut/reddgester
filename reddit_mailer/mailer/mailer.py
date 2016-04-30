@@ -11,7 +11,7 @@ class Mailer(object):
 
     @rpc
     def send_digest(self, digest, to):
-        msg = MIMEText(digest)
+        msg = MIMEText(digest['text'])
         msg['Subject'] = digest['subject']
         msg['From'] = os.getenv('DIGEST_FROM', 'andriy.kogut@gmail.com')
         msg['To'] = to

@@ -12,7 +12,8 @@ def trigger_digest(request):
     with ClusterRpcProxy(request.app['RPC_CONFIG']) as cluster_rpc:
         cluster_rpc.reddit_digester.digest.async(
             data['r'],
-            int(data.get('limit', 10))
+            int(data.get('limit', 10)),
+            data['to']
         )
     return web.json_response({'triggered': 1}, dumps=ujson.dumps)
 
