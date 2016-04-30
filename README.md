@@ -8,7 +8,7 @@ It provides an API for triggering email reddit digest.
 I've used `docker-compose` to glue everything together, so it should be pretty easy, just run `docker-compose build` and then `docker-compose up`
 
 ## Design
-The project consists of 3 main parts: api, digester and mailer
+The project consists of 3 main parts: api, digester and mailer. Each of this parts has it's own dependancies, `Dockerfile`, `requirements.txt`, etc.
 ### API
 Single endpoint  `/trigger_digest`:
 ```sh
