@@ -8,8 +8,11 @@ services:
   digester:
     depends_on:
       - rabbitmq
+    links:
+      - rabbitmq
     build:
       context: ./reddit_mailer/digester
     image: python:3.5.1-slim
     ports:
       - 8000:8000
+    command: bash -c "./scripts/wait_for_rabbitmq.sh && nameko run digester --broker amqp://guest:guest@rabbitmq"

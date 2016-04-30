@@ -10,5 +10,5 @@ class Digester(object):
     @rpc
     def digest(self, subreddit, limit):
         r = praw.Reddit(user_agent=USER_AGENT)
-        submissions = r.get_subreddit(subreddit).get_hot(limit)
-        return submissions
+        submissions = r.get_subreddit(subreddit).get_top(limit=limit)
+        return [str(s) for s in submissions]
