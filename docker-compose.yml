@@ -1,13 +1,13 @@
 version: "2"
 services:
+
   rabbitmq:
     image: rabbitmq:management
     ports:
       - 5672:5672
       - 15672:15672
+
   digester:
-    depends_on:
-      - rabbitmq
     links:
       - rabbitmq
     build:
@@ -16,3 +16,13 @@ services:
     ports:
       - 8000:8000
     command: bash -c "./scripts/wait_for_rabbitmq.sh && nameko run digester --broker amqp://guest:guest@rabbitmq"
+
+  api:
+    image: python:3.5.1-slim
+    links:
+      - rabbitmq
+    build:
+      context: ./reddit_mailer/api
+    ports:
+      - 8080:8080
+    command: python api.py runserver --amqp-uri amqp://guest:guest@rabbitmq:5672 --port=8080
