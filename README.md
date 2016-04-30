@@ -25,7 +25,6 @@ Build with [aiohttp](https://github.com/KeepSafe/aiohttp), triggers RPC to [name
 
 ### Mailer
 Another nameko-based microservice. It just sends the digest with [smtplib](https://docs.python.org/3.5/library/smtplib.html). Nothing fancy. By default compose launches [MailHog](https://github.com/mailhog/MailHog) where you can check out the digest being sent (MailHog web interface runs on `8025` port), but you can use any other SMTP server, just change this env vars in `mailer` section of `docker-compose.yml`:
-MailHog web interface runs on `8025` port.
 ```yaml
 environment:
     DIGEST_FROM: andriy.kogut@gmail.com
