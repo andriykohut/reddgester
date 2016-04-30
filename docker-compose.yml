@@ -21,7 +21,7 @@ services:
     image: python:3.5.1-slim
     ports:
       - 8000:8000
-    command: bash -c "./scripts/wait_for_rabbitmq.sh && nameko run digester --broker amqp://guest:guest@rabbitmq"
+    command: bash -c "while ! nc -z rabbitmq 5672; do sleep 3; done && nameko run digester --broker amqp://guest:guest@rabbitmq"
 
   mailer:
     links:
@@ -36,7 +36,7 @@ services:
       DIGEST_FROM: andriy.kogut@gmail.com
       SMTP_HOST: mailhog
       SMTP_PORT: 1025
-    command: bash -c "./scripts/wait_for_rabbitmq.sh && nameko run mailer --broker amqp://guest:guest@rabbitmq"
+    command: bash -c "while ! nc -z rabbitmq 5672; do sleep 3; done && nameko run mailer --broker amqp://guest:guest@rabbitmq"
 
   api:
     image: python:3.5.1-slim
