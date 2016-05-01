@@ -1,0 +1,8 @@
+<html>
+  <body>
+    <h1>Top {{ limit }} from <a href="https://www.reddit.com/r/{{ r }}">/r/{{ r }}</a></h1>
+    {% for item in posts %}
+      <p>{{ item.score }} - <a href="{{ item.permalink }}">{{ item.title }}</a><p>
+    {% endfor %}
+  </body>
+</html>
