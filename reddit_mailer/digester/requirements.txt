@@ -5,7 +5,7 @@ eventlet==0.18.4
 greenlet==0.4.9
 kombu==3.0.35
 mock==2.0.0
-nameko==2.3.0
+nameko==2.3.1
 path.py==8.2.1
 pbr==1.9.1
 praw==3.4.0

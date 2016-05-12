@@ -1,4 +1,3 @@
-import asyncio
 import click
 import ujson
 
@@ -6,11 +5,10 @@ from aiohttp import web
 from nameko.standalone.rpc import ClusterRpcProxy
 
 
-@asyncio.coroutine
-def trigger_digest(request):
-    data = yield from request.json(loader=ujson.loads)
+async def trigger_digest(request):
+    data = await request.json(loader=ujson.loads)
     with ClusterRpcProxy(request.app['RPC_CONFIG']) as cluster_rpc:
-        cluster_rpc.reddit_digester.digest.async(
+        cluster_rpc.reddit_digester.digest.call_async(
             data['r'],
             int(data.get('limit', 10)),
             data['to']
